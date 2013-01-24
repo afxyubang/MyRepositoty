@@ -1,1 +1,26 @@
 1.Install Mysql 5.0;
+2.Download Apache httpd server;
+3.Download Php5.4 zip file(not recommend other formats);
+4.install Apache2.2 in your PC(say d:\program files\apache foundation)
+5.upzip php5.4 to d:\php54
+6.edit php.ini: rename the d:\php54\php.ini-development as php.ini(you can make a backup of it first), remove the comment
+  notation(;) before the following lines:
+  extension=php_curl.dll
+  extension=php_gd2.dll
+  extension=php_gettext.dll
+  extension=php_mbstring.dll
+  extension=php_exif.dll
+  extension=php_mysql.dll
+  extension=php_mysqli.dll
+7.Add a line in php.ini, extension_dir = "d:\php54\ext"(the location of php extension dll), following ; extension_dir = "./"
+8.edit httpd.conf, add a line following <IfModule !mpm_winnt_module>, LoadModule php5_module "d:/php54/php5apache2_2.dll"
+  add the following items to support php3, php4, and php5:
+  AddType application/x-httpd-php .php3
+  AddType application/x-httpd-php .php4
+	AddType application/x-httpd-php .php5 in <IfModule mime_module> block.
+  Before end of the file, add PHPIniDir "d:\php54"
+9.start Apache and write some test php.
+  test.php:
+  <?php
+    phpinfo();
+  ?>
